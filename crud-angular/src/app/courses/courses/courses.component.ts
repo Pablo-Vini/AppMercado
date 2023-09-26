@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Course } from '../model/course';
+import { CoursesService } from '../services/courses.service';
 
 @Component({
   selector: 'app-courses',
@@ -7,12 +8,13 @@ import { Course } from '../model/course';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent {
-  courses: Course[] = [{
-    _id: "1", name: "Angular", category: "Front-End"
-  }];
+  courses: Course[] = [];
   displayedColumns = ['name','category']; 
 
+  coursesService: CoursesService;
+
   constructor() {
-    
+    this.coursesService = new CoursesService();
+    this.courses = this.coursesService.List();
   }
 }
