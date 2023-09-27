@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Course} from '../model/course';
 import {HttpClient} from '@angular/common/http';
+import { delay, first, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
 
+  private readonly API = '/assets/courses.json';
+
   constructor(private httpClient: HttpClient) { }
 
-  List(): Course[] {
-    return [{
-      _id: "1", name: "Angular", category: "Front-End"
-    }];
+  list(){
+    return this.httpClient.get<Course[]>(this.API).pipe(
+      delay(5000),
+      first(),
+      tap(courses => console.log(courses))
+    );
   }
 }
