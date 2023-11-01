@@ -12,11 +12,13 @@ import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/err
 })
 export class CoursesComponent implements OnInit {
   courses$: Observable <Course[]>;
-  displayedColumns = ['name','category']; 
+  //courses: Courses[] = [];
+  displayedColumns = ['name','category', 'actions']; 
 
   //coursesService: CoursesService;
 
   constructor(private coursesService: CoursesService, public dialog: MatDialog) {
+    //this.courses = []
     //this.coursesService = new CoursesService();
     this.courses$ = this.coursesService.list().pipe(
       catchError(error => {
