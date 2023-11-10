@@ -4,6 +4,7 @@ import { CoursesService } from '../services/courses.service';
 import { Observable, catchError, of, pipe } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses',
@@ -13,11 +14,11 @@ import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/err
 export class CoursesComponent implements OnInit {
   courses$: Observable <Course[]>;
   //courses: Courses[] = [];
-  displayedColumns = ['name','category', 'actions']; 
+  displayedColumns = ['name', 'category', 'actions']; 
 
   //coursesService: CoursesService;
 
-  constructor(private coursesService: CoursesService, public dialog: MatDialog) {
+  constructor(private coursesService: CoursesService, public dialog: MatDialog, private router: Router, private route: ActivatedRoute) {
     //this.courses = []
     //this.coursesService = new CoursesService();
     this.courses$ = this.coursesService.list().pipe(
@@ -27,14 +28,19 @@ export class CoursesComponent implements OnInit {
       })
     );
   }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-
 
   onError(errorMsg: string){
     this.dialog.open(ErrorDialogComponent,{
       data: errorMsg
-    })
+    });
   }
+
+  ngOnInit(): void {
+    
+  }
+
+  onAdd(){
+    this.router.navigate(['new'], {relativeTo: this.route});
+  }
+
 }
