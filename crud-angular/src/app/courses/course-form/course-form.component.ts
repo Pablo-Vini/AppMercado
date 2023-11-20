@@ -19,6 +19,8 @@ export class CourseFormComponent {
 
   ngOnInit(): void {}
 
-  onSubmit(){}
+  onSubmit(){
+    console.log(this.form.value);
+  }
   onCancel(){}
 }
