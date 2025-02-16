@@ -1,2 +1,2 @@
-# Spring_Angular
-Projeto CRUD usando Spring e Angular
+# App Mercado
+Projeto freelancer de app para mostragem de promoções de mercado.
